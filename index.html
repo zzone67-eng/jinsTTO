@@ -228,12 +228,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 .sim-ctx-miss{font-size:10px;color:var(--text3);padding:2px 0}
 
 /* 컴팩트 로또 그리드 (상세패널용) */
-.lotto-grid-sm{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;margin:4px 0 6px;padding:4px;background:#fff;border-radius:5px;border:1px solid #E24B4A;max-width:50%}
-.lg-sm-cell{aspect-ratio:4/5;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:#C0392B;background:transparent;border:0.5px solid #E24B4A}
-.lg-sm-cell.win{color:#1a1a18;background:#F5A623;border-color:#E8920D;font-weight:800}
-.lg-sm-cell.bonus-cell{color:#fff;background:#E24B4A;border-color:#C0392B;font-weight:800}
+.lotto-grid-sm{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin:4px 0 8px;padding:5px;background:#fff;border-radius:6px;border:2px solid #E24B4A;max-width:200px}
+.lg-sm-cell{aspect-ratio:4/5;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;color:#bbb;background:#f4f4f4;border:0.5px solid #e8e8e8}
+.lg-sm-cell.win{color:#fff;font-weight:800;font-size:11px;border:none;box-shadow:0 1px 3px rgba(0,0,0,0.2)}
+.lg-sm-cell.bonus-cell{color:#fff;font-weight:800;font-size:11px;border:2px solid #1a1a1a;box-shadow:0 1px 3px rgba(0,0,0,0.3)}
 .lg-sm-cell.empty-cell{border:none;background:transparent;pointer-events:none}
-.lg-grid-title{font-size:9px;color:var(--text3);font-weight:500;margin-bottom:2px;letter-spacing:.2px}
+.lg-grid-title{font-size:10px;color:var(--text2);font-weight:700;margin-bottom:4px;letter-spacing:.3px}
 
 .csim-table{width:100%;font-size:11px;border-collapse:collapse;margin-top:8px}
 .csim-table th{background:var(--surface2);color:var(--text2);font-weight:600;padding:5px 6px;border-bottom:1px solid var(--border);text-align:center}
@@ -293,12 +293,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
         <button class="btn-secondary" style="width:100%;font-size:11px;margin-top:4px" onclick="clearFixed('gen')">고정 번호 초기화</button>
       </div>
     </div>
-    <div class="btn-row" style="margin-top:0">
-      <button class="btn-primary" id="gen-btn" onclick="onGenerateClick()" style="flex:1">✨ 20게임 생성</button>
-      <button class="btn-secondary" onclick="clearGen()">초기화</button>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:0">
+      <button class="btn-primary" id="gen-btn" onclick="onGenerateClick()" style="padding:9px 4px;font-size:12px">🎯 프로<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
+      <button class="btn-secondary" id="prob-btn" onclick="onProBClick()" style="padding:9px 4px;font-size:12px;border:1.5px solid #673AB7;color:#673AB7;font-weight:700">🔀 프로B<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
+      <button class="btn-secondary" id="alpha-btn" onclick="onAlphaClick()" style="padding:9px 4px;font-size:12px;border:1.5px solid var(--accent);color:var(--accent);font-weight:700">⚡ 알파<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
     </div>
-    <div class="btn-row" style="margin-top:6px">
-      <button class="btn-secondary" id="alpha-btn" onclick="onAlphaClick()" style="flex:1;border:1.5px solid var(--accent);color:var(--accent);font-weight:700">⚡ 10게임 생성 (알파)</button>
+    <div style="text-align:right;margin-top:4px">
+      <button class="btn-secondary" onclick="clearGen()" style="font-size:11px;padding:4px 10px">초기화</button>
     </div>
     <div class="prog-wrap" id="prog-wrap" style="display:none">
       <div class="prog-lbl"><span id="prog-label">생성 중...</span><span id="prog-pct"></span></div>
@@ -381,13 +382,18 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
         <button class="btn-secondary" style="width:100%;font-size:11px;margin-top:4px" onclick="clearFixed('sim')">고정 번호 초기화</button>
       </div>
     </div>
-    <div class="btn-row" style="margin-top:8px">
-      <button class="btn-primary" id="sim-gen-btn" style="flex:1" onclick="onSimGenerateClick()">✨ 해당 회차 기준 20게임 생성</button>
-      <button class="btn-secondary" onclick="clearSim()">초기화</button>
+    <div style="margin-top:8px">
+      <div style="font-size:10px;color:var(--text3);margin-bottom:5px">해당 회차 기준 20게임 생성</div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px">
+        <button class="btn-primary" id="sim-gen-btn" onclick="onSimGenerateClick()" style="padding:9px 4px;font-size:12px">🎯 프로<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
+        <button class="btn-secondary" id="sim-prob-btn" onclick="onSimProBClick()" style="padding:9px 4px;font-size:12px;border:1.5px solid #673AB7;color:#673AB7;font-weight:700">🔀 프로B<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
+        <button class="btn-secondary" id="sim-alpha-btn" onclick="onSimAlphaClick()" style="padding:9px 4px;font-size:12px;border:1.5px solid var(--accent);color:var(--accent);font-weight:700">⚡ 알파<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span></button>
+      </div>
+      <div style="text-align:right;margin-top:4px">
+        <button class="btn-secondary" onclick="clearSim()" style="font-size:11px;padding:4px 10px">초기화</button>
+      </div>
     </div>
-    <div class="btn-row" style="margin-top:6px">
-      <button class="btn-secondary" id="sim-alpha-btn" onclick="onSimAlphaClick()" style="flex:1;border:1.5px solid var(--accent);color:var(--accent);font-weight:700">⚡ 알파 모드 10게임</button>
-    </div>
+
     <div class="prog-wrap" id="sim-prog-wrap" style="display:none">
       <div class="prog-lbl"><span id="sim-prog-label">생성 중...</span><span id="sim-prog-pct"></span></div>
       <div class="prog-bar"><div class="prog-fill" id="sim-prog-fill" style="width:0%"></div></div>
@@ -566,14 +572,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
         <span id="prob-chev-csim" style="font-size:11px;color:var(--accent)">▴ 접기</span>
       </div>
       <div id="prob-body-csim" style="padding:0 12px 10px">
-        <div class="battle-header" style="gap:0">
+        <div class="battle-header" style="gap:0;flex-wrap:wrap">
           <div class="battle-side normal"><div class="battle-side-label">순수 난수</div><div class="battle-side-name">일반</div></div>
           <div class="battle-vs">VS</div>
           <div class="battle-side pro"><div class="battle-side-label">규칙 필터</div><div class="battle-side-name">로또프로</div></div>
           <div class="battle-vs">VS</div>
-          <div class="battle-side" style="background:rgba(186,117,23,0.1);border:1px solid #BA7517;border-radius:var(--radius);padding:6px 10px;min-width:56px;text-align:center"><div class="battle-side-label" style="color:#BA7517">알파 모드</div><div class="battle-side-name" style="color:#BA7517">알파</div></div>
+          <div class="battle-side" style="background:rgba(186,117,23,0.1);border:1px solid #BA7517;border-radius:var(--radius);padding:6px 10px;min-width:52px;text-align:center"><div class="battle-side-label" style="color:#BA7517">알파</div><div class="battle-side-name" style="color:#BA7517">알파</div></div>
+          <div class="battle-vs">VS</div>
+          <div class="battle-side" style="background:rgba(103,58,183,0.1);border:1px solid #673AB7;border-radius:var(--radius);padding:6px 10px;min-width:52px;text-align:center"><div class="battle-side-label" style="color:#673AB7">혼합</div><div class="battle-side-name" style="color:#673AB7">프로B</div></div>
         </div>
-        <div style="font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:10px">DB 실제 당첨번호 기준, 일반 / 로또프로 / 알파 3파전 대결입니다.</div>
+        <div style="font-size:11px;color:var(--text2);line-height:1.6;margin-bottom:6px">DB 실제 당첨번호 기준 4파전 · 프로B = 알파50%+프로50%</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
           <div>
             <div style="font-size:10px;color:var(--text3);margin-bottom:4px">비교 회차 수</div>
@@ -720,7 +728,7 @@ function mkLottoGridSm(nums, bonus){
     const isWin=nums&&nums.includes(n);
     const isBonus=bonus&&n===bonus;
     if(isWin){cell.className='lg-sm-cell win';cell.style.background=getBallBg(n);}
-    else if(isBonus){cell.className='lg-sm-cell bonus-cell';cell.style.background='#534AB7';}
+    else if(isBonus){cell.className='lg-sm-cell bonus-cell';cell.style.background='#1B5E20';}
     else{cell.className='lg-sm-cell';}
     cell.textContent=n;
     grid.appendChild(cell);
@@ -1476,107 +1484,122 @@ function switchTab(name){
 /* ===== 생성 탭 ===== */
 let mainSets=[],extraSets=[],genTries=0;
 
-async function onAlphaClick(){
-  const btn=document.getElementById('alpha-btn');
-  btn.disabled=true;btn.textContent='생성 중...';
+async function onProBClick(){
+  const btn=document.getElementById('prob-btn');
+  const prog=document.getElementById('prog-wrap');
+  const pf=document.getElementById('prog-fill');
+  const pl=document.getElementById('prog-label');
+  const pp=document.getElementById('prog-pct');
+  btn.disabled=true;btn.innerHTML='생성 중...';
+  prog.style.display='block';
+  document.getElementById('gen-content').style.display='none';
+  document.getElementById('alpha-content').style.display='none';
 
   const round=nextRound();
   const ctx=getContext(round);
-  const s_all=[];
+  const sets=[];
+  const half=10;
 
-  // 알파 생성: A규칙 0-2개 위반, B규칙 0-1개 위반
   function genAlphaOne(){
-    const MAX_TRY=5000;
-    for(let t=0;t<MAX_TRY;t++){
+    for(let t=0;t<3000;t++){
+      const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+      const s=pool.sort((a,b)=>a-b);
+      const rrA={};rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx);}catch(e){rrA[r.id]=false;}});
+      const failA=Object.values(rrA).filter(v=>!v).length;if(failA<1||failA>2)continue;
+      const rrB={};rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
+      if(Object.values(rrB).filter(v=>!v).length>1)continue;
+      const rr={};
+      rules.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrA[r.id],detail:getDetail(r.id,s,ctx)};});
+      rulesB.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrB[r.id],detail:getDetailRuleB(r.id,s)};});
+      return{nums:s,rr,failed:false,isAlpha:true};
+    }
+    const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+    return{nums:pool.sort((a,b)=>a-b),rr:{},failed:true};
+  }
+
+  // 프로 10게임
+  pf.style.width='20%';pp.textContent='20%';pl.textContent='프로 10게임 생성 중...';
+  await new Promise(r=>setTimeout(r,10));
+  for(let i=0;i<half;i++){
+    sets.push(generateOneFull(round,2000,getFixedNums('gen')));
+    if(i%3===2){pf.style.width=(20+i/half*30)+'%';await new Promise(r=>setTimeout(r,0));}
+  }
+
+  // 알파 10게임
+  pf.style.width='55%';pp.textContent='55%';pl.textContent='알파 10게임 생성 중...';
+  await new Promise(r=>setTimeout(r,10));
+  for(let i=0;i<half;i++){
+    sets.push(genAlphaOne());
+    if(i%3===2){pf.style.width=(55+i/half*40)+'%';await new Promise(r=>setTimeout(r,0));}
+  }
+
+  // 섞기
+  for(let i=sets.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sets[i],sets[j]]=[sets[j],sets[i]];}
+
+  pf.style.width='100%';pp.textContent='100%';
+  await new Promise(r=>setTimeout(r,80));
+  prog.style.display='none';
+
+  const mainSets=sets.slice(0,20);const extraSets=[];
+  renderRuleOverview(mainSets.filter(s=>allPass(s.rr)),'rule-ov');
+  renderDistChart(mainSets.filter(s=>allPass(s.rr)),'dist-grid');
+  renderSetList(mainSets,extraSets,'set-list',round);
+  renderRandomBonus();
+  document.getElementById('gen-content').style.display='';
+  btn.disabled=false;btn.innerHTML='🔀 프로B<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span>';
+}
+
+async function onAlphaClick(){
+  const btn=document.getElementById('alpha-btn');
+  const prog=document.getElementById('prog-wrap');
+  const pf=document.getElementById('prog-fill');
+  const pl=document.getElementById('prog-label');
+  const pp=document.getElementById('prog-pct');
+  btn.disabled=true;btn.innerHTML='생성 중...';
+  prog.style.display='block';
+  document.getElementById('gen-content').style.display='none';
+  document.getElementById('alpha-content').style.display='none';
+
+  const round=nextRound();
+  const ctx=getContext(round);
+  const sets=[];
+
+  function genAlphaOne(){
+    for(let t=0;t<5000;t++){
       const pool=[];
       while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
       const s=pool.sort((a,b)=>a-b);
-
-      // 규칙A 위반 수
-      const rrA={};
-      rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx);}catch(e){rrA[r.id]=false;}});
-      const failA=Object.values(rrA).filter(v=>!v).length;
-      if(failA<0||failA>2)continue;
-
-      // 규칙B 위반 수
-      const rrB={};
-      rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
-      const failB=Object.values(rrB).filter(v=>!v).length;
-      if(failB>1)continue;
-
-      return{nums:s,failA,failB,rrA,rrB};
+      const rrA={};rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx);}catch(e){rrA[r.id]=false;}});
+      const failA=Object.values(rrA).filter(v=>!v).length;if(failA<1||failA>2)continue;
+      const rrB={};rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
+      if(Object.values(rrB).filter(v=>!v).length>1)continue;
+      const rr={};
+      rules.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrA[r.id],detail:getDetail(r.id,s,ctx)};});
+      rulesB.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrB[r.id],detail:getDetailRuleB(r.id,s)};});
+      return{nums:s,rr,failed:false,isAlpha:true};
     }
-    return null;
+    const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+    const s=pool.sort((a,b)=>a-b);
+    const rr={};
+    rules.filter(r=>r.on).forEach(r=>{try{rr[r.id]={ok:checkRule(r.id,s,ctx),detail:getDetail(r.id,s,ctx)};}catch(e){rr[r.id]={ok:false,detail:''};}}); 
+    return{nums:s,rr,failed:true,isAlpha:true};
   }
 
-  await new Promise(r=>setTimeout(r,10));
-  for(let i=0;i<10;i++){
-    const res=genAlphaOne();
-    if(res)s_all.push(res);
+  for(let i=0;i<20;i++){
+    sets.push(genAlphaOne());
+    if(i%4===3){pf.style.width=Math.round((i+1)/20*90)+'%';pp.textContent=Math.round((i+1)/20*90)+'%';await new Promise(r=>setTimeout(r,0));}
   }
 
-  // 렌더링
-  const list=document.getElementById('alpha-list');list.innerHTML='';
-  const ac=document.getElementById('alpha-content');ac.style.display='block';
+  pf.style.width='100%';pp.textContent='100%';
+  await new Promise(r=>setTimeout(r,60));
+  prog.style.display='none';
 
-  s_all.forEach(function(res,i){
-    const item=document.createElement('div');
-    item.style.cssText='padding:8px;margin-bottom:6px;border-radius:var(--radius);border:0.5px solid var(--border);background:var(--bg)';
-
-    // 번호 행
-    const top=document.createElement('div');
-    top.style.cssText='display:flex;align-items:center;gap:6px;margin-bottom:6px;flex-wrap:wrap';
-    const idx=document.createElement('span');
-    idx.style.cssText='font-size:11px;font-weight:700;color:var(--text3);min-width:18px';
-    idx.textContent=(i+1)+'.';
-    res.nums.forEach(function(n){
-      const zi=Math.floor((n-1)/10);
-      const colors=['#FAA916','#69B578','#4381C1','#A23B72','#C73E1D'];
-      const b=document.createElement('div');
-      b.style.cssText='width:30px;height:30px;border-radius:50%;background:'+colors[Math.min(zi,4)]+';color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center';
-      b.textContent=n;top.appendChild(b);
-    });
-    top.prepend(idx);item.appendChild(top);
-
-    // 위반 배지
-    const badge=document.createElement('div');
-    badge.style.cssText='display:flex;gap:6px;margin-bottom:4px;flex-wrap:wrap';
-
-    if(res.failA===0){
-      const ba=document.createElement('span');
-      ba.style.cssText='font-size:10px;padding:2px 7px;border-radius:10px;background:var(--green-bg,#e8f5e9);color:var(--green-text,#2e7d32);font-weight:600';
-      ba.textContent='A 전체통과';badge.appendChild(ba);
-    } else {
-      Object.entries(res.rrA).filter(([,v])=>!v).forEach(function([rid]){
-        const r=rules.find(x=>x.id===rid);
-        const ba=document.createElement('span');
-        ba.style.cssText='font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(186,117,23,0.15);color:#BA7517;font-weight:600';
-        ba.textContent='A위반:'+(r?r.name.slice(0,6):rid);badge.appendChild(ba);
-      });
-    }
-    if(res.failB===0){
-      const bb=document.createElement('span');
-      bb.style.cssText='font-size:10px;padding:2px 7px;border-radius:10px;background:var(--accent-bg);color:var(--accent);font-weight:600';
-      bb.textContent='B 전체통과';badge.appendChild(bb);
-    } else {
-      Object.entries(res.rrB).filter(([,v])=>!v).forEach(function([rid]){
-        const r=rulesB.find(x=>x.id===rid);
-        const bb=document.createElement('span');
-        bb.style.cssText='font-size:10px;padding:2px 7px;border-radius:10px;background:rgba(228,75,74,0.1);color:var(--red);font-weight:600';
-        bb.textContent='B위반:'+(r?r.name.slice(0,6):rid);badge.appendChild(bb);
-      });
-    }
-    item.appendChild(badge);list.appendChild(item);
-  });
-
-  if(s_all.length<10){
-    const warn=document.createElement('div');
-    warn.style.cssText='font-size:11px;color:var(--text3);text-align:center;padding:4px';
-    warn.textContent=s_all.length+'게임만 생성됨 (조건 만족 어려움)';
-    list.appendChild(warn);
-  }
-
-  btn.disabled=false;btn.textContent='⚡ 10게임 생성 (알파)';
+  renderRuleOverview(sets.filter(s=>allPass(s.rr)),'rule-ov');
+  renderDistChart(sets.filter(s=>allPass(s.rr)),'dist-grid');
+  renderSetList(sets,[],'set-list',round);
+  renderRandomBonus();
+  document.getElementById('gen-content').style.display='';
+  btn.disabled=false;btn.innerHTML='⚡ 알파<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span>';
 }
 
 async function onGenerateClick(){
@@ -1867,6 +1890,56 @@ function simSetRound(val){
   simRound=Math.min(maxR(),Math.max(1,v));updateSimRoundInfo();saveAllState();
 }
 
+
+async function onSimProBClick(){
+  const btn=document.getElementById('sim-prob-btn');
+  const pw=document.getElementById('sim-prog-wrap');
+  const pf=document.getElementById('sim-prog-fill');
+  const pl=document.getElementById('sim-prog-label');
+  const pp=document.getElementById('sim-prog-pct');
+  btn.disabled=true;btn.innerHTML='생성 중...';
+  pw.style.display='block';document.getElementById('sim-content').style.display='none';
+
+  const round=simRound??maxR();
+  const ctx=getContext(round);
+  const sets=[];const half=10;
+
+  function genAlpha(){
+    for(let t=0;t<3000;t++){
+      const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+      const s=pool.sort((a,b)=>a-b);
+      const rrA={};rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx);}catch(e){rrA[r.id]=false;}});
+      const failA=Object.values(rrA).filter(v=>!v).length;if(failA<1||failA>2)continue;
+      const rrB={};rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
+      if(Object.values(rrB).filter(v=>!v).length>1)continue;
+      const rr={};
+      rules.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrA[r.id],detail:''};});
+      rulesB.filter(r=>r.on).forEach(r=>{rr[r.id]={ok:rrB[r.id],detail:''};});
+      return{nums:s,rr,failed:false,isAlpha:true};
+    }
+    const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+    return{nums:pool.sort((a,b)=>a-b),rr:{},failed:true};
+  }
+
+  pf.style.width='20%';pp.textContent='20%';pl.textContent='프로 10게임...';
+  await new Promise(r=>setTimeout(r,10));
+  for(let i=0;i<half;i++) sets.push(generateOneFull(round,2000,[]));
+
+  pf.style.width='60%';pp.textContent='60%';pl.textContent='알파 10게임...';
+  await new Promise(r=>setTimeout(r,10));
+  for(let i=0;i<half;i++) sets.push(genAlpha());
+
+  for(let i=sets.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[sets[i],sets[j]]=[sets[j],sets[i]];}
+
+  pf.style.width='100%';pp.textContent='100%';
+  await new Promise(r=>setTimeout(r,60));
+  pw.style.display='none';
+  simMainSets=sets;simExtraSets=[];
+  document.getElementById('sim-content').style.display='';
+  renderSimResult(round);
+  btn.disabled=false;btn.innerHTML='🔀 프로B<br><span style="font-size:10px;font-weight:400;opacity:.8">20게임</span>';
+}
+
 async function onSimAlphaClick(){
   const btn=document.getElementById('sim-alpha-btn');
   const pw=document.getElementById('sim-prog-wrap');
@@ -1886,7 +1959,7 @@ async function onSimAlphaClick(){
       const s=pool.sort((a,b)=>a-b);
       const rrA={};rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx);}catch(e){rrA[r.id]=false;}});
       const failA=Object.values(rrA).filter(v=>!v).length;
-      if(failA>2)continue;
+      if(failA<1||failA>2)continue;
       const rrB={};rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
       const failB=Object.values(rrB).filter(v=>!v).length;
       if(failB>1)continue;
@@ -1902,14 +1975,14 @@ async function onSimAlphaClick(){
   pf.style.width='50%';pp.textContent='50%';pl.textContent='알파 생성 중...';
   await new Promise(r=>setTimeout(r,10));
   const sets=[];
-  for(let i=0;i<10;i++)sets.push(genAlpha());
+  for(let i=0;i<20;i++)sets.push(genAlpha());
   simMainSets=sets;simExtraSets=[];
 
   pf.style.width='100%';pp.textContent='100%';
   await new Promise(r=>setTimeout(r,50));
   pw.style.display='none';document.getElementById('sim-content').style.display='';
   renderSimResult(round);
-  btn.disabled=false;btn.textContent='⚡ 알파 모드 10게임';
+  btn.disabled=false;btn.textContent='⚡ 알파 모드 20게임';
 }
 
 async function onSimGenerateClick(){
@@ -1956,9 +2029,6 @@ function renderSimResult(round){
     const bb=mkBall(win.b,'md');bb.style.outline='2px solid #E24B4A';row.appendChild(bb);
     winDisp.appendChild(row);
 
-    // 7열 그리드 (당첨번호 위치)
-    winDisp.appendChild(mkLottoGridSm(win.n, win.b));
-
     const chev=document.createElement('span');
     chev.style.cssText='font-size:12px;color:var(--accent);cursor:pointer;display:block;text-align:center;padding:4px 0;border-top:0.5px solid var(--border);margin-top:4px';
     chev.textContent='▾ 규칙 분석 보기';
@@ -1973,6 +2043,8 @@ function renderSimResult(round){
       chev.textContent=isOpen?'▾ 규칙 분석 보기':'▴ 규칙 분석 닫기';
       if(!isOpen&&!dp.dataset.loaded){
         dp.dataset.loaded='1';
+        // 로또 용지 먼저 삽입
+        dp.appendChild(mkLottoGridSm(win.n,win.b));
         renderSimWinRuleDetail(win.n,round,dp);
       }
     };
@@ -2227,7 +2299,6 @@ function searchAndShowDetail(d,containerEl){
   const sp=document.createElement('span');sp.style.color='var(--text3)';sp.textContent='+';row.appendChild(sp);
   const bb=mkBall(d.b,'sm');bb.style.outline='1.5px solid #E24B4A';row.appendChild(bb);
   containerEl.appendChild(row);
-  containerEl.appendChild(mkLottoGridSm(d.n,d.b));
   const divider=document.createElement('div');divider.style.cssText='height:0.5px;background:var(--border);margin:8px 0';
   containerEl.appendChild(divider);
   const detail=document.createElement('div');
@@ -2247,7 +2318,6 @@ function renderSimWinRuleDetail(nums,round,container){
   titleTxt.textContent=round+'회차 당첨번호 규칙 분석 (보너스 제외)';
   title.appendChild(titleTxt);
   container.appendChild(title);
-
 
   // N회차 미출현 A/B: 그 시점 기준 미출현 "전체 번호 목록"을 보여주고,
   // 그 중 실제 당첨번호에 포함된 것은 금색 테두리로 하이라이트
@@ -3548,6 +3618,7 @@ async function runComparisonSim(){
   const randCnt={0:0,1:0,2:0,3:0,4:0,5:0};
   const ruleCnt={0:0,1:0,2:0,3:0,4:0,5:0};
   const alphaCnt={0:0,1:0,2:0,3:0,4:0,5:0};
+  const probBCnt={0:0,1:0,2:0,3:0,4:0,5:0};
   let totalTries=0,totalPassed=0;
 
   for(let di=0;di<targets.length;di++){
@@ -3583,11 +3654,39 @@ async function runComparisonSim(){
       const ctx2=getContext(draw.r);
       const rrA={};rules.filter(r=>r.on).forEach(r=>{try{rrA[r.id]=checkRule(r.id,s,ctx2);}catch(e){rrA[r.id]=false;}});
       const failA=Object.values(rrA).filter(v=>!v).length;
-      if(failA>2)continue;
+      if(failA<1||failA>2)continue;
       const rrB={};rulesB.filter(r=>r.on).forEach(r=>{try{rrB[r.id]=checkRuleB(r.id,s);}catch(e){rrB[r.id]=false;}});
       const failB=Object.values(rrB).filter(v=>!v).length;
       if(failB>1)continue;
       alphaCnt[csimRank(s,draw.n,draw.b)]++;agen++;
+    }
+
+    // 로또프로B: 알파50% + 프로50%
+    const nRand=0;
+    const nAlpha=Math.round(nGames*0.5);
+    const nPro=nGames-nAlpha;
+    // 알파 25%
+    let bagen=0,batries=0;
+    while(bagen<nAlpha&&batries<nAlpha*60){
+      const pool=[];while(pool.length<6){const n=1+Math.floor(Math.random()*45);if(!pool.includes(n))pool.push(n);}
+      const s2=pool.sort((a,b)=>a-b); batries++;
+      const ctx3=getContext(draw.r);
+      const ba={};rules.filter(r=>r.on).forEach(r=>{try{ba[r.id]=checkRule(r.id,s2,ctx3);}catch(e){ba[r.id]=false;}});
+      const failBA=Object.values(ba).filter(v=>!v).length;if(failBA<1||failBA>2)continue;
+      const bb={};rulesB.filter(r=>r.on).forEach(r=>{try{bb[r.id]=checkRuleB(r.id,s2);}catch(e){bb[r.id]=false;}});
+      if(Object.values(bb).filter(v=>!v).length>1)continue;
+      probBCnt[csimRank(s2,draw.n,draw.b)]++;bagen++;
+    }
+    // 프로 50%
+    let bpgen=0,bptries=0;
+    while(bpgen<nPro&&bptries<nPro*30){
+      const nums=csimGenRandom();bptries++;
+      if(!quickCheckB(nums))continue;
+      const ctx4=getContext(draw.r);
+      const s3b=[...nums].sort((a,b)=>a-b);
+      let bok=true;
+      for(const r of rules){if(!r.on)continue;try{if(!checkRule(r.id,s3b,ctx4)){bok=false;break;}}catch(e){bok=false;break;}}
+      if(bok){probBCnt[csimRank(s3b,draw.n,draw.b)]++;bpgen++;}
     }
   }
 
@@ -3624,14 +3723,17 @@ async function runComparisonSim(){
   res.appendChild(condBadge);
 
   // ── 3열 카드 레이아웃 ──────────────────────────────────────────────
+  const r5b2=[1,2,3,4,5].reduce((a,k)=>a+probBCnt[k],0);
+  const prB=calcPrize(probBCnt);
   const cols=[
     {name:'일반',cnt:randCnt,wins:r5r,prize:prR,color:'#666',bg:'var(--surface)'},
     {name:'로또프로',cnt:ruleCnt,wins:r5f,prize:prF,color:'var(--accent)',bg:'var(--accent-bg)'},
     {name:'알파',cnt:alphaCnt,wins:r5a2,prize:prA,color:'#BA7517',bg:'rgba(186,117,23,0.07)'},
+    {name:'프로B',cnt:probBCnt,wins:r5b2,prize:prB,color:'#673AB7',bg:'rgba(103,58,183,0.07)'},
   ];
 
   const grid=document.createElement('div');
-  grid.style.cssText='display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:8px';
+  grid.style.cssText='display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:8px';
 
   cols.forEach(function(col){
     const isWinner=col.wins===maxWin&&col.wins>0;
@@ -3695,9 +3797,9 @@ async function runComparisonSim(){
 
   // 헤더
   const th=document.createElement('div');
-  th.style.cssText='display:grid;grid-template-columns:60px repeat(3,1fr);font-size:10px;font-weight:700;background:var(--surface2);padding:5px 8px';
-  [['등수','var(--text3)'],['일반','#666'],['로또프로','var(--accent)'],['알파','#BA7517']].forEach(function(h){
-    const d=document.createElement('div');d.style.cssText='text-align:center;color:'+h[1];d.textContent=h[0];th.appendChild(d);
+  th.style.cssText='display:grid;grid-template-columns:44px repeat(4,1fr);font-size:9px;font-weight:700;background:var(--surface2);padding:5px 4px';
+  [['등수','var(--text3)'],['일반','#666'],['로또프로','var(--accent)'],['알파','#BA7517'],['프로B','#673AB7']].forEach(function(h,hi){
+    const d=document.createElement('div');d.style.cssText='text-align:'+(hi===0?'left':'center')+';color:'+h[1]+';font-size:9px';d.textContent=h[0];th.appendChild(d);
   });
   tbl.appendChild(th);
 
@@ -3706,12 +3808,13 @@ async function runComparisonSim(){
     if(rc+fc+ac2===0)return;
     const maxC=Math.max(rc,fc,ac2);
     const row=document.createElement('div');
-    row.style.cssText='display:grid;grid-template-columns:60px repeat(3,1fr);padding:5px 8px;border-top:0.5px solid var(--border);align-items:center';
-    const lbl=document.createElement('div');lbl.style.cssText='font-size:10px;color:var(--text3);text-align:center';lbl.textContent=labels[rk];
+    row.style.cssText='display:grid;grid-template-columns:44px repeat(4,1fr);padding:5px 4px;border-top:0.5px solid var(--border);align-items:center';
+    const lbl=document.createElement('div');lbl.style.cssText='font-size:9px;color:var(--text3);text-align:left';lbl.textContent=labels[rk];
     row.appendChild(lbl);
-    [[rc,'#666'],[fc,'var(--accent)'],[ac2,'#BA7517']].forEach(function(cv){
+    const bc2=probBCnt[rk];const maxC2=Math.max(rc,fc,ac2,bc2);
+    [[rc,'#666'],[fc,'var(--accent)'],[ac2,'#BA7517'],[bc2,'#673AB7']].forEach(function(cv){
       const d=document.createElement('div');
-      const isMax=cv[0]===maxC&&cv[0]>0;
+      const isMax=cv[0]===maxC2&&cv[0]>0;
       d.style.cssText='text-align:center;font-size:'+(isMax?'12px':'11px')+';font-weight:'+(isMax?'800':'400')+';color:'+(isMax?cv[1]:'var(--text)');
       d.textContent=cv[0]+'건'+(isMax?' ✓':'');
       row.appendChild(d);
@@ -3721,12 +3824,13 @@ async function runComparisonSim(){
 
   // 당첨금 합계 행
   const prz=document.createElement('div');
-  prz.style.cssText='display:grid;grid-template-columns:60px repeat(3,1fr);padding:6px 8px;border-top:1.5px solid var(--border);background:var(--surface2)';
-  const pLbl=document.createElement('div');pLbl.style.cssText='font-size:10px;font-weight:700;color:var(--text3);text-align:center';pLbl.textContent='💰총액';
+  prz.style.cssText='display:grid;grid-template-columns:44px repeat(4,1fr);padding:6px 4px;border-top:1.5px solid var(--border);background:var(--surface2)';
+  const pLbl=document.createElement('div');pLbl.style.cssText='font-size:9px;font-weight:700;color:var(--text3);text-align:left';pLbl.textContent='💰총액';
   prz.appendChild(pLbl);
-  [[prR,'#666'],[prF,'var(--accent)'],[prA,'#BA7517']].forEach(function(pv){
+  const maxPrize2=Math.max(prR,prF,prA,prB);
+  [[prR,'#666'],[prF,'var(--accent)'],[prA,'#BA7517'],[prB,'#673AB7']].forEach(function(pv){
     const d=document.createElement('div');
-    const isMax=pv[0]===maxPrize&&pv[0]>0;
+    const isMax=pv[0]===maxPrize2&&pv[0]>0;
     d.style.cssText='text-align:center;font-size:'+(isMax?'13px':'11px')+';font-weight:800;color:'+(isMax?pv[1]:'var(--text2)');
     d.textContent=prizeStr(pv[0])+(isMax?' 🏆':'');
     prz.appendChild(d);
@@ -3737,9 +3841,11 @@ async function runComparisonSim(){
   // ── 우승 배너 ──────────────────────────────────────────────────────
   const banner=document.createElement('div');
   banner.style.cssText='text-align:center;padding:10px;border-radius:var(--radius);font-size:13px;font-weight:700;border:1.5px solid';
-  const winner=r5f>=maxWin&&r5f>r5r?'pro':r5a2>=maxWin&&r5a2>r5r?'alpha':r5r>=maxWin?'rand':'tie';
+  const maxWin2=Math.max(r5r,r5f,r5a2,r5b2);
+  const winner=r5f>=maxWin2&&r5f>r5r?'pro':r5b2>=maxWin2&&r5b2>r5r?'prob':r5a2>=maxWin2&&r5a2>r5r?'alpha':r5r>=maxWin2?'rand':'tie';
   const wmap={
     pro:['#4caf50','var(--green-bg,#e8f5e9)','#2e7d32','🏆 로또프로 승!','+'+(r5r>0?((r5f-r5r)/r5r*100).toFixed(1):0)+'% vs 일반'],
+    prob:['#673AB7','rgba(103,58,183,0.1)','#673AB7','🎯 프로B 승!','+'+(r5r>0?((r5b2-r5r)/r5r*100).toFixed(1):0)+'% vs 일반'],
     alpha:['#BA7517','rgba(186,117,23,0.1)','#BA7517','⚡ 알파 승!','+'+(r5r>0?((r5a2-r5r)/r5r*100).toFixed(1):0)+'% vs 일반'],
     rand:['#ccc','#f5f5f5','#555','일반 승','이번엔 난수가 우세'],
     tie:['var(--border)','var(--surface2)','var(--text2)','무승부',''],
